@@ -1,3 +1,13 @@
+// function reset () {
+//   losses++;
+//   document.getElementById("losses").textContent = losses;
+//   wrongAnswerArray = [];
+//   document.getElementById("guessed").textContent = wrongAnswerArray;
+//   guesses = 10
+//   document.getElementById("guessed").textContent = guesses;
+//   word = words[Math.floor(Math.random() * words.length)];
+// }
+
 //Define array of words for computer to select one
 var words = ["strangle", "choke", "suicide", "drown", "murder", "poison", "penalty", "behead", "starve", "stab", "coding"];
 var wrongAnswerArray = [];
@@ -10,7 +20,7 @@ var word = words[Math.floor(Math.random() * words.length)];
 //Loop through the word and add underscores to equal how many spaces need to be added
 var answerArray = [];
 for (var i = 0; i < word.length; i++) {
-  answerArray[i] = " _ ";
+  answerArray[i] = " __ ";
 }
 
 //Display the spaces on page
@@ -32,22 +42,43 @@ document.onkeyup = function(event) {
   var i = 0
   
   if (word[i] !== userInput) {
-    wrongAnswerArray.push(userInput);
+    wrongAnswerArray.push(" " +userInput);
     document.getElementById("guessed").textContent = wrongAnswerArray;
-  }
-  
-    while(i<l){
-
-      console.log(word[i],userInput)
-      if (word[i]===userInput){
-        answerArray[i]=userInput;
+    guesses--;
+    document.getElementById("remaining").textContent = guesses; 
+    
+    if (guesses ===0) {
+      losses++;
+      document.getElementById("losses").textContent = losses;
+      wrongAnswerArray = [];
+      document.getElementById("guessed").textContent = wrongAnswerArray;
+      guesses = 10
+      document.getElementById("remaining").textContent = guesses;
+      word = words[Math.floor(Math.random() * words.length)];
+      answerArray = [];
+      for (var i = 0; i < word.length; i++) {
+        answerArray[i] = " __ ";
+      }
       document.getElementById("current-word").textContent = answerArray;
-        console.log("hi",answerArray)
-      } 
-      i++
   }
+}
+  
+  while(i<l){
+
+    console.log(word[i],userInput)
+    if (word[i]===userInput){
+      answerArray[i]=userInput;
+    document.getElementById("current-word").textContent = answerArray;
+      console.log("hi",answerArray)
+    } 
+    i++
+  } 
+    // if (word ====)
 };
 
+// else if (i===l) {
+//   wins.push(" "+ wins)
+//   document.getElementById("wins").textContent = wins;
 
 
 // if (answer === userChoice.toLowerCase()) {
@@ -75,4 +106,3 @@ document.onkeyup = function(event) {
   //   guesses --; 
   //   document.getElementById("remaining").textContent = guesses; 
   // }                    
-
